@@ -11,7 +11,8 @@ if __name__ == '__main__':
     }
     start_time: int = 0
     start_node: int = 0
+    mutation_prob: float = 0.5
 
-    dtsp = DTSP(nodes, node_times, edges, weights, start_time, start_node)
+    dtsp = DTSP(nodes, node_times, edges, weights, start_time, start_node, mutation_prob)
     cycle = dtsp.simulate(100)[0]
     print(cycle, dtsp.count_cycle_time(cycle))
