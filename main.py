@@ -10,6 +10,8 @@ if __name__ == '__main__':
         3: [1, 1, 2, 1, 2, 1]
     }
     start_time: int = 0
-    dtsp = DTSP(nodes, node_times, edges, weights, start_time)
+    start_node: int = 0
+
+    dtsp = DTSP(nodes, node_times, edges, weights, start_time, start_node)
     cycle = dtsp.simulate(100)[0]
     print(cycle, dtsp.count_cycle_time(cycle))

@@ -1,3 +1,4 @@
+import copy
 from itertools import permutations
 from random import sample, randint
 
@@ -41,6 +42,8 @@ class DTSP:
         paths = list(permutations(self.nodes))
         cycles = []
         for path in paths:
+            if path[0] != self.start_node:
+                continue
             cycle = list(path)
             cycle.append(path[0])
             cycles.append(cycle)
@@ -58,18 +61,19 @@ class DTSP:
         for _ in range(steps):
             sorted_cycles = sorted(cycles, key=self.count_cycle_time)
             # print(sorted_cycles, list(map(self.count_cycle_time, sorted_cycles)))
-            sorted_cycles = sorted_cycles[:len(cycles) // 2] * 2
-            cycles = []
+            sorted_cycles = sorted_cycles[:len(cycles) // 2]
+            cycles = copy.deepcopy(sorted_cycles)
             for cycle in sorted_cycles:
-                mutated_cycle = self.apply_mutation(cycle)
+                mutated_cycle = copy.copy(self.apply_mutation(cycle))
                 cycles.append(mutated_cycle)
         return cycles
 
-    def __init__(self, nodes, node_times, edges, weights, start_time):
+    def __init__(self, nodes, node_times, edges, weights, start_time, start_node):
         self.start_time = start_time
         self.weights = weights
         self.edges = edges
         self.node_times = node_times
         self.nodes = nodes
         self.time_now = start_time
+        self.start_node = start_node
 
