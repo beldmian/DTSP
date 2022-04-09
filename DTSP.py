@@ -5,18 +5,7 @@ from random import sample, randint, choice
 
 class DTSP:
     def get_timed_weights(self, time) -> list[int]:
-        time_interval = 0
-        intervals = list(self.weights.keys())
-        for i in range(len(intervals)):
-            if i == 0:
-                continue
-            if intervals[i - 1] <= time < intervals[i]:
-                time_interval = intervals[i-1]
-                break
-            if i == len(intervals):
-                time_interval = intervals[i]
-                break
-        weights = self.weights[time_interval]
+        weights = [weight_func(time) for weight_func in self.weights]
         return weights
 
     def count_cycle_time(self, cycle: list[int]) -> int:
