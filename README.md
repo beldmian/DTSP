@@ -1,1 +1,1 @@
-# Genetic algorythm solution for dynamic TSP
+# Genetic algorythm and simulated annealing solution for dynamic TSP
